@@ -1,0 +1,11 @@
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\bin\Debug\SeaBattle_.exe.config
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\bin\Debug\SeaBattle_.exe
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\bin\Debug\SeaBattle_.pdb
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.csproj.AssemblyReference.cache
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.Properties.Resources.resources
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.csproj.GenerateResource.cache
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.csproj.CoreCompileInputs.cache
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.exe
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.pdb
+C:\Users\User\RiderProjects\SeaBattle_\SeaBattle_\obj\Debug\SeaBattle_.Main.resources
