@@ -68,8 +68,7 @@ namespace SeaBattle_.Supplementation
                 }
             }
 
-            var str = "C:\\Users\\User\\RiderProjects\\SeaBattle_\\SeaBattle_\\FilesWithMove\\Move" + fileNumber +
-                      ".txt";
+            var str = "FilesWithMove\\Move" + fileNumber + ".txt";
             var m = new MoveMobFile
             {
                 Str = new StreamReader(str).ReadLine()

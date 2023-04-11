@@ -24,7 +24,7 @@ namespace SeaBattle_
             NextPlayer = nextPlayer;
             SizeMap = sizeMap;
             _main = main;
-            _filesCount = Directory.GetFiles("C:\\Users\\User\\RiderProjects\\SeaBattle_\\SeaBattle_\\FilesWithMove",
+            _filesCount = Directory.GetFiles("FilesWithMove",
                 "*", SearchOption.TopDirectoryOnly).Length;
         }
 
@@ -45,8 +45,13 @@ namespace SeaBattle_
                     {
                         if (await MoveAi())
                         {
-                            if (CheckWin()) 
+                            if (CheckWin())
+                            {
+                                Uno();
+                                CurrentPlayer.Map.DrawField(FieldPart.Map);
+                                CurrentPlayer.Map.DrawField(FieldPart.Radar);
                                 return;
+                            }
 
                             // Если успешно выстрелил
                             continue;
@@ -164,9 +169,7 @@ namespace SeaBattle_
 
             // Логика на обнаружение кораблей, эффективна для многопалубных
             moveAi = SearchCell(radar, moveAi);
-
-            // TODO Прописать доп логику для нахождения однопалубных (если рядом есть свободные клетки, то бить по той клетке, у которой больше свободных клеток рядом)
-
+            
             // Обычная стрельба
             _main.VieMove(moveAi);
             return Attack.DoAttack(CurrentPlayer, NextPlayer, moveAi, this);
