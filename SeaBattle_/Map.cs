@@ -7,9 +7,19 @@ using SeaBattle_.Supplementation;
 
 namespace SeaBattle_
 {
+    /// <summary>
+    /// Карта.
+    /// </summary>
     public class Map
     {
+        /// <summary>
+        /// Размер поля.
+        /// </summary>
         private static int SizeMap { get; set; }
+
+        /// <summary>
+        /// Размер ячейки.
+        /// </summary>
         private int CellSize { get; }
 
         /// <summary>
@@ -22,8 +32,17 @@ namespace SeaBattle_
         /// </summary>
         public Cell[,] Radar { get; }
 
+        /// <summary>
+        /// Объект для отображения.
+        /// </summary>
         private readonly Main _main;
 
+        /// <summary>
+        /// Конструктор с 3 параметрами.
+        /// </summary>
+        /// <param name="main">Отображатель.</param>
+        /// <param name="sizeMap">Размер поля.</param>
+        /// <param name="cellSize">Размер ячейки.</param>
         public Map(Main main, int sizeMap, int cellSize)
         {
             _main = main;
@@ -35,6 +54,10 @@ namespace SeaBattle_
             Init(Radar);
         }
 
+        /// <summary>
+        /// Инициализация карты.
+        /// </summary>
+        /// <param name="cells">Массив ячеек.</param>
         private static void Init(Cell[,] cells)
         {
             for (var x = 0; x < SizeMap; x++)
@@ -42,6 +65,11 @@ namespace SeaBattle_
                 cells[x, y] = new Cell { X = x, Y = y };
         }
 
+        /// <summary>
+        /// Получение типа поля (свое/вражеское).
+        /// </summary>
+        /// <param name="fieldPart">Тип поля.</param>
+        /// <returns>Массив клеток. Карта (либо своя, либо вражеская).</returns>
         public Cell[,] GetFieldPart(FieldPart fieldPart)
         {
             switch (fieldPart)
@@ -297,7 +325,7 @@ namespace SeaBattle_
                         {
                             newX = rnd.Next(0, 3);
                             while ((double)newX % 2 != 0)
-                                newX = rnd.Next(0, count4 > 150? 5 : 3);
+                                newX = rnd.Next(0, count4 > 150 ? 5 : 3);
                             newY = rnd.Next(0, SizeMap);
                             count4++;
                         }
@@ -431,7 +459,18 @@ namespace SeaBattle_
             return true;
         }
 
+        /// <summary>
+        /// Проврка на минимальный клетки.
+        /// </summary>
+        /// <param name="number">Проверяемая клетка.</param>
+        /// <returns>1 - в случае успеха, иначе - 0.</returns>
         private static int CheckMin(int number) => number <= 0 ? 0 : 1;
+
+        /// <summary>
+        /// Проврка на максимальную клетки.
+        /// </summary>
+        /// <param name="number">Проверяемая клетка.</param>
+        /// <returns>1 - в случае успеха, иначе - 0.</returns>
         private static int CheckMax(int number) => number >= SizeMap - 1 ? 0 : 1;
     }
 }

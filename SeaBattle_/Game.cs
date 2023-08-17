@@ -8,14 +8,44 @@ using SeaBattle_.Supplementation;
 
 namespace SeaBattle_
 {
+    /// <summary>
+    /// Игра.
+    /// </summary>
     public class Game
     {
+        /// <summary>
+        /// Текущий игрок.
+        /// </summary>
         private Player CurrentPlayer { get; set; }
+
+        /// <summary>
+        /// Соперник.
+        /// </summary>
         private Player NextPlayer { get; set; }
+
+        /// <summary>
+        /// Размерность поля.
+        /// </summary>
         private int SizeMap { get; }
+
+        /// <summary>
+        /// Отображатель.
+        /// </summary>
         private readonly Main _main;
+
+        /// <summary>
+        /// Список использованных файлов с ходами.
+        /// </summary>
         private readonly List<MoveMobFile> _filesWithMoves = new List<MoveMobFile>();
+
+        /// <summary>
+        /// Количество файлов с ходами.
+        /// </summary>
         private int _filesCount;
+
+        /// <summary>
+        /// Можно ли стрелять по диагонали.
+        /// </summary>
         private bool _isNotMoveToDiagonal;
 
         public Game(Player currentPlayer, Player nextPlayer, int sizeMap, Main main)
@@ -28,12 +58,19 @@ namespace SeaBattle_
                 "*", SearchOption.TopDirectoryOnly).Length;
         }
 
+        /// <summary>
+        /// Присвоение значений, что игроки в игре.
+        /// </summary>
         public void Start()
         {
             CurrentPlayer.ConditionGame = ConditionGame.InGame;
             NextPlayer.ConditionGame = ConditionGame.InGame;
         }
 
+        /// <summary>
+        /// Ход.
+        /// </summary>
+        /// <param name="move">Клетка куда сходили.</param>
         public async void Move(Cell move)
         {
             while (true)
@@ -69,7 +106,7 @@ namespace SeaBattle_
                     {
                         if (Attack.DoAttack(CurrentPlayer, NextPlayer, move, this))
                         {
-                            if (CheckWin()) 
+                            if (CheckWin())
                                 return;
 
                             // Успешный выстрел
@@ -101,6 +138,11 @@ namespace SeaBattle_
             return false;
         }
 
+        /// <summary>
+        /// Проверка окончания игры.
+        /// </summary>
+        /// <param name="player">Игрок, который проверятеся на победу.</param>
+        /// <returns>true - в случае выигрыша.</returns>
         private static bool GameOver(Player player) =>
             player.ShipsDead[0] == 4 && player.ShipsDead[1] == 3 &&
             player.ShipsDead[2] == 2 && player.ShipsDead[3] == 1;
@@ -116,8 +158,10 @@ namespace SeaBattle_
             CalculationWeight(radar);
             // Обычный ход AI
             var moveAi = CellSearchByWeight(radar);
-            // берем последний файл из списка файлов............как тут не материться?
-            var lastFile = _filesWithMoves.Count == 0 ? null : _filesWithMoves[_filesWithMoves.Count - 1];
+            // Берем последний файл из списка файлов............как тут не материться?
+            var lastFile = _filesWithMoves.Count == 0
+                ? null
+                : _filesWithMoves[_filesWithMoves.Count - 1];
 
             // Добавляем файл (работает только при первой итерации)
             if (lastFile == null)
@@ -169,7 +213,7 @@ namespace SeaBattle_
 
             // Логика на обнаружение кораблей, эффективна для многопалубных
             moveAi = SearchCell(radar, moveAi);
-            
+
             // Обычная стрельба
             _main.VieMove(moveAi);
             return Attack.DoAttack(CurrentPlayer, NextPlayer, moveAi, this);
@@ -216,6 +260,8 @@ namespace SeaBattle_
         /// <summary>
         /// Поиск приоритетного поля, когда закончились выстрелы по диагонали. Метод эффективен для многопалубных
         /// </summary>
+        /// <param name="radar">Поле соперника.</param>
+        /// <param name="moveAi">Ход ИИ.</param>
         private Cell SearchCell(Cell[,] radar, Cell moveAi)
         {
             for (var x = 0; x < SizeMap; x++)
@@ -536,6 +582,13 @@ namespace SeaBattle_
                 radar[x, y].Weight *= 30;
         }
 
+        /// <summary>
+        /// Закрашивание клетки.
+        /// </summary>
+        /// <param name="x">Координата х.</param>
+        /// <param name="y">Координата у.</param>
+        /// <param name="current">Игрок, который ходит сейчас.</param>
+        /// <param name="next">Игрок, который ходил следущим.</param>
         private static void PaintingPoint(int x, int y, Player current, Player next)
         {
             if (Map.CheckBorders(x, y) && next.Map.Cells[x, y].Ship == null)
@@ -545,6 +598,11 @@ namespace SeaBattle_
             }
         }
 
+        /// <summary>
+        /// Проверка хода, можно ли стрелять в данную клетку.
+        /// </summary>
+        /// <param name="cell">Проверяемая клетка.</param>
+        /// <returns>true - если стрелять можно.</returns>
         public bool CheckMove(Cell cell) => CurrentPlayer.Map.Radar[cell.X, cell.Y].Color == MColor.Cell;
     }
 }

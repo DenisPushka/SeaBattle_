@@ -5,6 +5,9 @@ using SeaBattle_.Models;
 
 namespace SeaBattle_.Supplementation
 {
+    /// <summary>
+    /// Атака.
+    /// </summary>
     public static class Attack
     {
         /// <summary>

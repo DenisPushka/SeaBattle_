@@ -7,6 +7,9 @@ namespace SeaBattle_
 {
     public partial class Main : Form
     {
+        /// <summary>
+        /// Размерность поля.
+        /// </summary>
         private const int SizeMap = 10;
 
         public Main()
@@ -15,8 +18,14 @@ namespace SeaBattle_
             InputData.KeyPress += CheckEnterKeyPress;
         }
 
+        /// <summary>
+        /// Игра.
+        /// </summary>
         private Game _game;
 
+        /// <summary>
+        /// Точка входа.
+        /// </summary>
         private async void Start()
         {
             // Расстановка кораблей
@@ -42,6 +51,9 @@ namespace SeaBattle_
             _game.Start();
         }
 
+        /// <summary>
+        /// Эвент на нажатие клавиши.
+        /// </summary>
         private void CheckEnterKeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -79,6 +91,9 @@ namespace SeaBattle_
             
         }
         
+        /// <summary>
+        /// Кнопка запуска игры.
+        /// </summary>
         private void buttonStart_Click(object sender, EventArgs e) => Start();
     }
 }

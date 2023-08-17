@@ -5,18 +5,41 @@ using SeaBattle_.Supplementation;
 
 namespace SeaBattle_.Models
 {
+    /// <summary>
+    /// Ячейка.
+    /// </summary>
     public class Cell
     {
+        /// <summary>
+        /// Корабль.
+        /// </summary>
         public Ship Ship { get; set; }
+        
+        /// <summary>
+        /// Координата Х.
+        /// </summary>
         public int X { get; set; }
+        
+        /// <summary>
+        /// Координата У.
+        /// </summary>
         public int Y { get; set; }
         
+        /// <summary>
+        /// Вес клетки.
+        /// </summary>
         public int Weight { get; set; }
-        
+        /// <summary>
+        /// Цвет клетки.
+        /// </summary>
         public Color Color { get; set; }
 
         public Cell() => Color = MColor.Cell;
 
+        /// <summary>
+        /// Проверка, что имеется карабль в клетке и цвет клетки не равен цвету выстрела по клетке.
+        /// </summary>
+        /// <returns></returns>
         public bool CheckShipAndPoint() => Ship != null || Color == MColor.Point;
         
         /// <summary>
